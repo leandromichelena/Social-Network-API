@@ -1,0 +1,31 @@
+{
+  "name": "social-network-api",
+  "version": "1.0.0",
+  "description": "Coding Bootcamp Weekly Challenge 18. This is an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. Created using Express.js for routing, MongoDB NoSQL database, and the Mongoose ODM.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leandromichelena/Social-Network-API.git"
+  },
+  "keywords": [
+    "Express",
+    "Mongo",
+    "API",
+    "Mongoose",
+    "NoSQL"
+  ],
+  "author": "Leandro Michelena",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leandromichelena/Social-Network-API/issues"
+  },
+  "homepage": "https://github.com/leandromichelena/Social-Network-API#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.4.5",
+    "time-stamp": "^2.2.0"
+  }
+}
