@@ -1,4 +1,4 @@
-const { Thought } = require('../models');
+const { Thought, User } = require('../models');
 
 const thoughtController = {
     // get all thoughts
@@ -46,7 +46,7 @@ const thoughtController = {
         Thought.create(body)
             .then(({ _id }) => {
                 return User.findOneAndUpdate(
-                    { _id: body.userId },
+                    { _id: body.user_id },
                     { $push: { thoughts: _id } },
                     { new: true }
                 );
@@ -106,6 +106,38 @@ const thoughtController = {
                 }
                 res.json(userDbData);
             })
+            .catch((err) => res.json(err));
+    },
+
+    // add a reaction
+    addReaction({ params, body }, res) {
+        Thought.findOneAndUpdate(
+            { _id: params.thoughtId },
+            { $push: { reactions: body } },
+            { new: true, runValidators: true }
+        )
+            .populate({ path: "reactions", select: "-__v" })
+            .select("-__v")
+            .then((thoughtDbData) => {
+                if (!thoughtDbData) {
+                    res.status(404).json({
+                        message: "No thought found for this id",
+                    });
+                    return;
+                }
+                res.json(thoughtDbData);
+            })
+            .catch((err) => res.status(400).json(err));
+    },
+
+    // delete a reaction
+    deleteReaction({ params }, res) {
+        Thought.findOneAndUpdate(
+            { _id: params.thoughtId },
+            { $pull: { reactions: { reactionId: params.reactionId } } },
+            { new: true }
+        )
+            .then((thoughtDbData) => res.json(thoughtDbData))
             .catch((err) => res.json(err));
     },
 };

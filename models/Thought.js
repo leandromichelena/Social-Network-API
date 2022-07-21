@@ -21,7 +21,7 @@ const ReactionSchema = new Schema({
     },
     createdAt: {
         type: Date,
-        default: timestamp('YYYY/MM/DD:mm:ss')
+        default: timestamp()
     },
 },
     {
@@ -41,7 +41,7 @@ const ThoughtSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: timestamp('YYYY/MM/DD:mm:ss')
+            default: timestamp()
         },
         username: {
             type: String,
@@ -59,7 +59,7 @@ const ThoughtSchema = new Schema(
 );
 
 ThoughtSchema.virtual("reactionCount").get(function () {
-    return this.reactions ? this.reactions.length : 0;
+    return this.reactions.length;
 });
 
 // create the Thought model using the ThoughtSchema
